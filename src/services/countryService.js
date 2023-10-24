@@ -7,7 +7,7 @@ export const countryService = {
             return country
         })
 
-        return obj.data
+        return 0
 
     }
 }
