@@ -1,27 +1,53 @@
 <script setup>
-    import { RouterLink, RouterView } from 'vue-router'
+
+const emit = defineEmits(['send-data'])
+
+import { RouterLink, RouterView } from 'vue-router'
+import { countryService } from '../../services/countryService'
+
+const service = countryService
+
+function getCountry(name) {
+  let countryData = service.getByName(name)
+
+  countryData.then(data => {
+    emit('send-data', data)
+  }) 
+  
+}
+
+/* store.$subscribe(
+    (mutation, state) => {
+        if (mutation.type == 'patch object') {
+            console.log(mutation.payload)
+        }
+
+        countryData.value = Object.assign({}, state.countryData[0])
+    }
+) */
+
 </script>
 
 <template>
   <nav class="navbar">
     <ul>
       <li>
-        <RouterLink :to="{ name: 'russia' }">Rusia</RouterLink>
+        <RouterLink @click="getCountry('russia')" :to="{ name: 'russia' }">Rusia</RouterLink>
       </li>
       <li>
-        <RouterLink :to="{ name: 'china' }">China</RouterLink>
+        <RouterLink @click="getCountry('china')" :to="{ name: 'china' }">China</RouterLink>
       </li>
       <li>
-        <RouterLink :to="{ name: 'qatar' }">Qatar</RouterLink>
+        <RouterLink @click="getCountry('qatar')" :to="{ name: 'qatar' }">Qatar</RouterLink>
       </li>
       <li>
-        <RouterLink :to="{ name: 'bielorrusia' }">Bielorrusia</RouterLink>
+        <RouterLink @click="getCountry('belarus')" :to="{ name: 'bielorrusia' }">Bielorrusia</RouterLink>
       </li>
       <li>
-        <RouterLink :to="{ name: 'turquia' }">Turquía</RouterLink>
+        <RouterLink @click="getCountry('turkey')" :to="{ name: 'turquia' }">Turquía</RouterLink>
       </li>
       <li>
-        <RouterLink :to="{ name: 'reinoUnido' }">Reino Unido</RouterLink>
+        <RouterLink @click="getCountry('united kingdom')" :to="{ name: 'reinoUnido' }">Reino Unido</RouterLink>
       </li>
     </ul>
   </nav>

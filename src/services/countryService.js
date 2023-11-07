@@ -1,13 +1,7 @@
 export const countryService = {
-    getByName: (name, obj) => {
-        obj = fetch('https://restcountries.com/v3.1/name/'+name)
-        .then(response => response.json())
-        .then(data => {
-            let country = data
-            return country
-        })
-
-        return 0
-
+    getByName: async (name) => {
+        let response = await fetch('https://restcountries.com/v3.1/name/'+name)
+        let data = await response.json()
+        return data
     }
 }
